@@ -1,8 +1,6 @@
 
 import _ from 'underscore';
 import {crearDeck} from './usecases/crear-deck';
-import { pedirCartas } from './usecases/pedir-cartas';
-import { valorCarta } from './usecases/valor-carta';
 import { addImage } from './usecases/add-cart-image';
 import { btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos } from './usecases/referencias-html';
 import { acumularPuntos } from './usecases/acumular-puntos';
@@ -16,7 +14,7 @@ const miModulo = (() => {
         
     let puntosJugadores = [];
 
-    //Esta función inicializa el juego 
+    // Esta función inicializa el juego 
     const inicializarJuego = ( numJugadores = 1) => {
         deck = crearDeck(tipos, especiales);
         puntosJugadores = [];
@@ -34,7 +32,7 @@ const miModulo = (() => {
     const turnoComputadora = ( puntosMinimos ) => {
         let puntosComputadora;
         do{
-            const carta = addImage( deck, jugadorCartasContainer.length-1 );
+            const carta = addImage( puntosJugadores ,deck, jugadorCartasContainer.length-1 );
             puntosComputadora = acumularPuntos( puntosJugadores,puntosJugadores.length-1, carta )
         }while( (puntosComputadora < puntosMinimos) && puntosMinimos <= 21 );
         ( puntosComputadora >= 21 || puntosComputadora >= puntosMinimos ) 
@@ -52,7 +50,7 @@ const miModulo = (() => {
     //EVENTOS
     btnPedirCarta.addEventListener( 'click', () => {
 
-        const carta = addImage( deck, 0 );
+        const carta = addImage( puntosJugadores, deck, 0 );
         const puntosJugador = acumularPuntos( puntosJugadores, 0, carta );
         ( puntosJugador >= 21 ) 
         ? disabledButtons(true)

@@ -6,6 +6,9 @@
  */
 
 export const valorCarta = (carta) => {
+        if ( !carta ) {
+            throw new Error('No se encuentra la carta')
+        }
         const valor = carta.substring(0, carta.length-1);
         return ( valor === 'A') 
         ? 11 

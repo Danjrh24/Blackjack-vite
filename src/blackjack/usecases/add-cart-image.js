@@ -7,7 +7,12 @@ import { jugadorCartasContainer } from "./referencias-html";
  * @returns {String} Retorna un carta del deck 
  */
 
-export const addImage = ( deck, turno ) => {
+export const addImage = ( puntosJugadores, deck, turno ) => {
+        if ( !deck || deck.length === 0 ) {
+            throw new Error('No hay cartas en el deck')
+        } else if ( turno > puntosJugadores.length-1 ) {
+            throw new Error('No hay tantos jugadores')
+        }
         const carta = pedirCartas(deck);
         const cartaImg = document.createElement('img');
         jugadorCartasContainer[turno].append(cartaImg);

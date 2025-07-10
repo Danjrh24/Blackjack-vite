@@ -5,7 +5,7 @@
  */
 
 export const pedirCartas = (deck) => {
-        if (deck.length === 0 ){
+        if ( !deck || deck.length === 0 ){
             throw 'No hay cartas en el deck';
         };
         return deck.pop();
