@@ -1,6 +1,10 @@
 
 import _ from 'underscore';
 import {crearDeck} from './usecases/crear-deck';
+import { pedirCartas } from './usecases/pedir-cartas';
+import { valorCarta } from './usecases/valor-carta';
+import { addImage } from './usecases/add-cart-image';
+import { btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos } from './usecases/referencias-html';
 
 const miModulo = (() => {
     'use strict'
@@ -10,14 +14,7 @@ const miModulo = (() => {
         especiales = ['A','J','K','Q'];
         
     let puntosJugadores = [];
-
-    // Referencias del HTML
-    const btnPedirCarta = document.querySelector('#btnPedirCarta'),
-        btnDetener = document.querySelector('#btnDetener'),
-        btnNuevo = document.querySelector('#btnNuevo'),
-        jugadorCartasContainer = document.querySelectorAll('.divCartas'),
-        showPuntos = document.querySelectorAll('small');
-        
+    
     //Esta función inicializa el juego 
     const inicializarJuego = ( numJugadores = 1) => {
         deck = crearDeck(tipos, especiales);
@@ -32,46 +29,17 @@ const miModulo = (() => {
         btnPedirCarta.disabled = boolean;
         btnDetener.disabled = boolean;
     }
-    //Esta funcion ejecuta la funcion de pedirCartas y agrega una imagen al contenenedor del jugador o la 
-    //computadora con la carta obtenida 
-    const addImage = ( turno) => {
-        const carta = pedirCartas();
-        const cartaImg = document.createElement('img');
-        jugadorCartasContainer[turno].append(cartaImg);
-        cartaImg.className = 'carta';
-        cartaImg.src = `assets/cartas/${carta}.png`
-        return carta;
-    }
     //Esta funcion acumula los puntos de los jugadores y lo muestra
     const acumularPuntos = (turno,carta) => {
         puntosJugadores[turno] = puntosJugadores[turno] + valorCarta(carta);
         showPuntos[turno].innerHTML = puntosJugadores[turno];
         return puntosJugadores[turno];
     }
-    //Esta funcion sirve para pedir una carta
-    const pedirCartas = () => {
-        if (deck.length === 0 ){
-            throw 'No hay cartas en el deck';
-        }
-        let carta = deck.pop();
-        console.log(carta);
-        return carta;
-    }
-    //Esta funcion sirve para obtener el valor de la carta
-    const valorCarta = (carta) => {
-        const valor = carta.substring(0, carta.length-1);
-        return ( valor === 'A') 
-        ? 11 
-        :( isNaN(valor) ) 
-        ? 10 
-        : valor * 1;
-    }
-
     //TURNO DE LA COMPUTADORA
     const turnoComputadora = ( puntosMinimos ) => {
         let puntosComputadora;
         do{
-            const carta = addImage(jugadorCartasContainer.length-1);
+            const carta = addImage( deck, jugadorCartasContainer.length-1 );
             puntosComputadora = acumularPuntos(puntosJugadores.length-1,carta)
         }while( (puntosComputadora < puntosMinimos) && puntosMinimos <= 21 );
         ( puntosComputadora >= 21 || puntosComputadora >= puntosMinimos ) 
@@ -89,7 +57,7 @@ const miModulo = (() => {
     //EVENTOS
     btnPedirCarta.addEventListener( 'click', () => {
 
-        const carta = addImage(0);
+        const carta = addImage( deck, 0 );
         const puntosJugador = acumularPuntos(0, carta);
         ( puntosJugador >= 21 ) 
         ? disabledButtons(true)
