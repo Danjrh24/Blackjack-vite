@@ -1,9 +1,7 @@
 
 import _ from 'underscore';
-import {crearDeck} from './usecases/crear-deck';
-import { addImage } from './usecases/add-cart-image';
-import { btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos } from './usecases/referencias-html';
-import { acumularPuntos } from './usecases/acumular-puntos';
+
+import { crearDeck, addImage, acumularPuntos, disabledButtons, btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos, turnoComputadora } from "./usecases";
 
 const miModulo = (() => {
     'use strict'
@@ -23,30 +21,6 @@ const miModulo = (() => {
             puntosJugadores.push(0);
         }
     }
-    //Esta funcion desabilita los botones de pedir carta y detener
-    const disabledButtons = (boolean) =>{
-        btnPedirCarta.disabled = boolean;
-        btnDetener.disabled = boolean;
-    }
-    //TURNO DE LA COMPUTADORA
-    const turnoComputadora = ( puntosMinimos ) => {
-        let puntosComputadora;
-        do{
-            const carta = addImage( puntosJugadores ,deck, jugadorCartasContainer.length-1 );
-            puntosComputadora = acumularPuntos( puntosJugadores,puntosJugadores.length-1, carta )
-        }while( (puntosComputadora < puntosMinimos) && puntosMinimos <= 21 );
-        ( puntosComputadora >= 21 || puntosComputadora >= puntosMinimos ) 
-        ? disabledButtons(true)
-        : disabledButtons(false);
-        setTimeout(() => {
-            ( puntosComputadora === puntosMinimos ) 
-            ? (alert('Nadie gana :('))
-            :( puntosComputadora > 21 ) 
-            ?(alert('Felicidades, ganaste!!')) 
-            :(alert('Computadora gana'));
-        }, 300);
-    }
-
     //EVENTOS
     btnPedirCarta.addEventListener( 'click', () => {
 
@@ -57,7 +31,7 @@ const miModulo = (() => {
         : disabledButtons(false);
         setTimeout(() => {
             ( puntosJugador === 21 ) 
-            ? (console.warn('21, genial!'), turnoComputadora(puntosJugador)) 
+            ? (console.warn('21, genial!'), turnoComputadora(puntosJugadores, deck, puntosJugador)) 
             :( puntosJugador > 21 ) ? (alert('Computadora gana')) 
             : ''
         }, 300);
@@ -66,7 +40,7 @@ const miModulo = (() => {
 
     btnDetener.addEventListener('click', () => {
         btnPedirCarta.disable = true;
-        turnoComputadora(puntosJugadores[0]);
+        turnoComputadora(puntosJugadores, deck, puntosJugadores[0]);
     })
 
     btnNuevo.addEventListener('click', () => {
@@ -86,9 +60,3 @@ const miModulo = (() => {
     };
 
 })();
-
-
-
-
-
-

@@ -5,7 +5,7 @@ import { valorCarta } from "./valor-carta";
  * Esta funcion es para acumular los puntos del jugador
  * @param {Number} turno 
  * @param {String} carta Ejemplo: 3H 
- * @param {Array} puntosJugadores 
+ * @param {Array<Number>} puntosJugadores 
  * @returns {Number} Retorna los puntos del jugador
  */
 
