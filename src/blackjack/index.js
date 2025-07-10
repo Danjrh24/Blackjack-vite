@@ -5,6 +5,7 @@ import { pedirCartas } from './usecases/pedir-cartas';
 import { valorCarta } from './usecases/valor-carta';
 import { addImage } from './usecases/add-cart-image';
 import { btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos } from './usecases/referencias-html';
+import { acumularPuntos } from './usecases/acumular-puntos';
 
 const miModulo = (() => {
     'use strict'
@@ -14,7 +15,7 @@ const miModulo = (() => {
         especiales = ['A','J','K','Q'];
         
     let puntosJugadores = [];
-    
+
     //Esta función inicializa el juego 
     const inicializarJuego = ( numJugadores = 1) => {
         deck = crearDeck(tipos, especiales);
@@ -29,18 +30,12 @@ const miModulo = (() => {
         btnPedirCarta.disabled = boolean;
         btnDetener.disabled = boolean;
     }
-    //Esta funcion acumula los puntos de los jugadores y lo muestra
-    const acumularPuntos = (turno,carta) => {
-        puntosJugadores[turno] = puntosJugadores[turno] + valorCarta(carta);
-        showPuntos[turno].innerHTML = puntosJugadores[turno];
-        return puntosJugadores[turno];
-    }
     //TURNO DE LA COMPUTADORA
     const turnoComputadora = ( puntosMinimos ) => {
         let puntosComputadora;
         do{
             const carta = addImage( deck, jugadorCartasContainer.length-1 );
-            puntosComputadora = acumularPuntos(puntosJugadores.length-1,carta)
+            puntosComputadora = acumularPuntos( puntosJugadores,puntosJugadores.length-1, carta )
         }while( (puntosComputadora < puntosMinimos) && puntosMinimos <= 21 );
         ( puntosComputadora >= 21 || puntosComputadora >= puntosMinimos ) 
         ? disabledButtons(true)
@@ -58,7 +53,7 @@ const miModulo = (() => {
     btnPedirCarta.addEventListener( 'click', () => {
 
         const carta = addImage( deck, 0 );
-        const puntosJugador = acumularPuntos(0, carta);
+        const puntosJugador = acumularPuntos( puntosJugadores, 0, carta );
         ( puntosJugador >= 21 ) 
         ? disabledButtons(true)
         : disabledButtons(false);
