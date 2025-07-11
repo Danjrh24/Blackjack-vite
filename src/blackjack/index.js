@@ -18,7 +18,7 @@ const miModulo = (() => {
     deck.forEach( (carta) => {
         fetchImage(carta);
     } )
-
+    
     // Esta función inicializa el juego 
     const inicializarJuego = ( numJugadores = 1) => {
         deck = crearDeck(tipos, especiales);
