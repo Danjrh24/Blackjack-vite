@@ -5,4 +5,6 @@ export { btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos
 export { disabledButtons } from './disabled-buttons';
 export { crearDeck } from './crear-deck';
 export { turnoComputadora } from './turno-computadora';
+export { pedirCartas } from './pedir-cartas';
+export { valorCarta } from './valor-carta';
 

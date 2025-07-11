@@ -1,5 +1,5 @@
-import { showPuntos } from "./referencias-html";
-import { valorCarta } from "./valor-carta";
+
+import { showPuntos, valorCarta } from '../usecases';
 
 /** 
  * Esta funcion es para acumular los puntos del jugador

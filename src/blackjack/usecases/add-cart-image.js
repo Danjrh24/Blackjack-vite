@@ -1,5 +1,5 @@
-import { pedirCartas } from "./pedir-cartas";
-import { jugadorCartasContainer } from "./referencias-html";
+
+import { pedirCartas, jugadorCartasContainer } from '../usecases';
 /**
  * Esta funcion es para agregar una imagen de la carta en el DOM
  * @param {Array<String>} deck Ejemplo: ['2C','3D','4H','5S'] 

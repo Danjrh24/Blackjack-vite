@@ -1,16 +1,23 @@
 
 import _ from 'underscore';
 
-import { crearDeck, addImage, acumularPuntos, disabledButtons, btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos, turnoComputadora } from "./usecases";
+import { crearDeck, addImage, acumularPuntos, disabledButtons, btnPedirCarta, btnDetener, btnNuevo, jugadorCartasContainer, showPuntos, turnoComputadora, pedirCartas } from "./usecases";
 
 const miModulo = (() => {
     'use strict'
 
-    let deck = [];
     const tipos = ['C','D','H','S'],
         especiales = ['A','J','K','Q'];
-        
+
+    let deck = crearDeck(tipos, especiales);
+    console.log(deck);
     let puntosJugadores = [];
+
+    const fetchImage = async (carta) => await fetch(`assets/cartas/${carta}.png`)
+
+    deck.forEach( (carta) => {
+        fetchImage(carta);
+    } )
 
     // Esta función inicializa el juego 
     const inicializarJuego = ( numJugadores = 1) => {
