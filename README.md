@@ -10,17 +10,21 @@ Este proyecto fue desarrollado a la par con el instructor durante el curso, con 
 
 ## 🛠️ Tecnologías utilizadas
 
-- HTML
-- CSS
-- JavaScript (vanilla)
-- Vite.js
-- CommonJS / ES Modules
+![ES6 Modules](https://img.shields.io/badge/ES6_Modules-black?style=flat-square&logo=javascript&logoColor=yellow)
+![JavaScript](https://img.shields.io/badge/-JavaScript-black?style=flat-square&logo=javascript)
+![Git](https://img.shields.io/badge/-Git-black?style=flat-square&logo=git)
+![Vite](https://img.shields.io/badge/Vite-black?style=flat-square&logo=vite&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-black?style=flat-square&logo=visual-studio-code&logoColor=white)
+![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5)
+![CSS3](https://img.shields.io/badge/CSS3-black?style=flat-square&logo=css3&logoColor=white)
 
 ## 🔧 Modificaciones personales
 
 - Creé un módulo para centralizar y exportar las referencias a elementos HTML, facilitando su uso en otros módulos.
 - Uso de funciones asincrónicas para carga dinámica de imágenes de cartas con fetch.
 - Validaciones adicionales para evitar errores en la puntuación
+
+>Modificaciones adicionales proximamente...
 
 ## 🧠 Conceptos aplicados
 
