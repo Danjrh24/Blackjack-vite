@@ -1,6 +1,6 @@
 # 🃏 Blackjack Game
 
-Este proyecto es un juego clásico de Blackjack desarrollado en JavaScript como parte del curso "JavaScript Moderno: Guía para dominar el lenguaje" impartido por [Fernando Herrera](https://www.udemy.com/user/fernando-herrera/).
+Este proyecto es un juego clásico de Blackjack desarrollado en JavaScript como parte del curso "JavaScript Moderno: Guía para dominar el lenguaje" impartido por [Fernando Herrera](https://www.udemy.com/user/550c38655ec11/).
 
 ## 🎮 Descripción
 
